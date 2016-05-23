@@ -1,0 +1,27 @@
+<h1>Your Cart</h1>
+
+
+<% if @cart.empty? %>
+<p> cart is empty</p>
+<% else %>
+<%= link_to "Empty Cart", cart_clear_path %>
+<% end %>
+
+<br>
+<% total = 0 %>
+
+<% @cart.each do |id, quantity| %>
+
+<% product = Product.find_by_id(id) %>
+<ul>
+<li>
+<%= link_to product.title, product%>
+Quantity: <%= quantity %>
+<br>
+<%= product.price%>$
+</li>
+
+</ul>
+<%total = quantity * total += product.price %>
+<% end %>
+<b>Total</b> <%= total %>$
